@@ -1,0 +1,143 @@
+<html>
+    <head>
+         <!-- Meta -->
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="description" content="" />
+        <meta name="keywords" content="" />
+        <meta name="author" content="StudioX" /> 
+        <meta name="googlebot" content="index, follow" /> 
+        <meta name="robots" content="index, follow" /> 
+        <meta name="SKYPE_TOOLBAR" content="SKYPE_TOOLBAR_PARSER_COMPATIBLE" /> 
+        <meta name="viewport" content="width=device-width, maximum-scale=1.0, minimal-ui"/>
+
+        <!-- Title -->
+        <title>Slider JQ UI Gradient</title>
+
+        <!--Fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300,400" rel="stylesheet">
+
+        <!-- Styles -->
+        <link href="web/css/jquery-ui.css" type="text/css" rel="stylesheet prefetch" />
+        <link href="web/css/style.css" type="text/css" rel="stylesheet prefetch" />
+    </head>
+
+    <body>
+        <div class="site">
+            <main class="main-content">
+                <section>
+                    <div class="wrapper">
+                        <header>
+                            <h1>Gradient Slider Jquery UI</h1>
+                        </header>
+
+                        <ul class="flex-list">
+                            <li class="flex-list__col-50">
+                                <div class="slider-container">
+                                    <div class="js-slider" data-value="34">
+                                        <div class="js-handle ui-slider-handle"></div>
+                                        <div class="slider-range-inverse js-range-inverse"></div>
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li class="flex-list__col-50">
+                                <div class="slider-container">
+                                    <div class="js-slider" data-value="10">
+                                        <div class="js-handle ui-slider-handle"></div>
+                                        <div class="slider-range-inverse js-range-inverse"></div>
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li class="flex-list__col-100">
+                                <div class="slider-container">
+                                    <div class="js-slider" data-value="27">
+                                        <div class="js-handle ui-slider-handle"></div>
+                                        <div class="slider-range-inverse js-range-inverse"></div>
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li class="flex-list__col-33">
+                                <div class="slider-container">
+                                    <div class="js-slider" data-value="23">
+                                        <div class="js-handle ui-slider-handle"></div>
+                                        <div class="slider-range-inverse js-range-inverse"></div>
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li class="flex-list__col-33">
+                                <div class="slider-container">
+                                    <div class="js-slider" data-value="38">
+                                        <div class="js-handle ui-slider-handle"></div>
+                                        <div class="slider-range-inverse js-range-inverse"></div>
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li class="flex-list__col-33">
+                                <div class="slider-container">
+                                    <div class="js-slider" data-value="18">
+                                        <div class="js-handle ui-slider-handle"></div>
+                                        <div class="slider-range-inverse js-range-inverse"></div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </section>
+            </main>
+
+            <footer class="main-footer">
+                <div class="wrapper">
+                    by: <a href="" title="github" target="_blank">Hristiyana Minkova</a>
+                </div>
+            </footer>
+        </div>
+
+        <!-- Script -->
+        <script src="web/js/jquery-3.2.0.min.js"></script>
+        <script src="web/js/jquery-ui.min.js"></script>
+        <script>
+
+            $('.js-slider').each(function(){
+                initSlider($(this));
+            });
+
+            function initSlider(slider){
+                var valueSlider = slider.data('value'),
+                    handle = slider.find('.js-handle'),
+                    inverse = slider.find('.js-range-inverse');
+
+                slider.slider({
+                    orientation: "horizontal",
+                    range: "min",
+                    min: 1,
+                    max: 40,
+                    value: valueSlider,
+                    create: function(event, ui) {
+                        handle.text(slider.slider('value'));
+                        calcPositionGradient(slider, handle, inverse);
+                    },
+                    slide: function(event, ui) {
+                        handle.text(ui.value);
+                        calcPositionGradient(slider, handle, inverse);
+                    },
+                    change: function(event, ui) {
+                        calcPositionGradient(slider, handle, inverse);
+                    }
+                });
+            }
+
+            function calcPositionGradient(el, handle, inverse){
+                var width = el.width(),
+                    leftPosition = handle.position().left,
+                    calc = (100 - ((leftPosition/width)*100)).toFixed(2),
+                    result = calc + '%';
+                inverse.css('width', result);
+            }
+        </script>
+    </body>
+
+</html>
